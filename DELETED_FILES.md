@@ -142,3 +142,12 @@ Restored generic Item module files referenced in previous deletion step, as they
 Deleted Liquibase change files for Fixed Asset modules:
 
 - db/changelog/changes/43-*\n- db/changelog/changes/44-*\n- db/changelog/changes/45-*\n- db/changelog/changes/46-*\n- db/changelog/changes/47-*\n- db/changelog/changes/48-*\n- db/changelog/changes/49-*\n- db/changelog/changes/50-*\n- db/changelog/changes/51-*\n- db/changelog/changes/52-*\n- db/changelog/changes/53-*\n- db/changelog/changes/54-*\n- db/changelog/changes/55-*\n- db/changelog/changes/56-*\n- db/changelog/changes/57-*\n
+
+
+## Chart of Accounts (Specially Kept)
+- src\main\java\com\example\accounts\controller\ChartOfAccountController.java
+- src\main\java\com\example\accounts\dto\ChartOfAccountRequest.java
+- src\main\java\com\example\accounts\dto\ChartOfAccountResponse.java
+- src\main\java\com\example\accounts\entity\ChartOfAccount.java
+- src\main\java\com\example\accounts\repository\ChartOfAccountRepository.java
+- src\main\java\com\example\accounts\service\ChartOfAccountService.java
