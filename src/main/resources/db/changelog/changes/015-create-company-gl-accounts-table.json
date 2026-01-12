@@ -1,0 +1,144 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "015-create-company-gl-accounts-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "company_gl_accounts",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "company_gl_account_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "company_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "accounts_receivable_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "advances_received_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "pdcs_received_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "contract_assets_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "retention_receivables_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "retention_output_vat_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "accounts_payable_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "advances_paid_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "pdcs_issued_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "retention_payables_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "retention_input_vat_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "unbilled_purchases_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "advance_to_receive_id",
+                                        "type": "BIGINT"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "company_gl_accounts",
+                            "baseColumnNames": "company_id",
+                            "referencedTableName": "companies",
+                            "referencedColumnNames": "company_id",
+                            "constraintName": "fk_company_gl_company"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "company_gl_accounts",
+                            "baseColumnNames": "accounts_receivable_id",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "constraintName": "fk_company_gl_ar"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "company_gl_accounts",
+                            "baseColumnNames": "accounts_payable_id",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "constraintName": "fk_company_gl_ap"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

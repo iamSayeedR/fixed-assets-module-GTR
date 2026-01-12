@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="028-seed-cash-flow-items" author="system">
+        <comment>Seed Cash Flow Items (12 items)</comment>
+        
+        <sql>
+            INSERT INTO cash_flow_items (code, description, is_active) VALUES
+            ('000000001', 'Cash Transfer', true),
+            ('000000002', 'Gains on Exchange Differences', true),
+            ('000000003', 'Losses on Exchange Differences', true),
+            ('000000004', 'Other Payments for Current Transactions', true),
+            ('000000005', 'Other Receipts for Current Transactions', true),
+            ('000000006', 'Payment from Customers (Sale of Goods, Works, Services)', true),
+            ('000000007', 'Payment of Loans', true),
+            ('000000008', 'Payment to Suppliers (Goods, Works, Services)', true),
+            ('000000009', 'Bank Charges', true),
+            ('000000010', 'Tax Payment', true),
+            ('000000011', 'Tax Refund', true),
+            ('000000012', 'Repayment on Loans Extended', true);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

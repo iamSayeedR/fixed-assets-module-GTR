@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="020-seed-chart-of-accounts" author="system">
+        <comment>Seed 243 chart of accounts with hierarchy</comment>
+        
+        <sql>
+            -- Batch 1: Non-Current Assets (41 accounts)
+            INSERT INTO chart_of_accounts (account_code, description, account_type, section, parent_group, currency, is_active, is_off_balance, is_quantitative) VALUES
+            ('1000000', 'Non-Current Assets', 'DEBIT_CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Accounts Group', 'USD', true, false, false),
+            
+            ('1010000', 'Property, Plant and Equipment', 'DEBIT_CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Non-Current Assets', 'USD', true, false, false),
+            ('1010100', 'Fixed Assets at Cost', 'DEBIT', 'BS_PROPERTY_PLANT_AND_EQUIPMENT', 'Property, Plant and Equipment', 'USD', true, false, false),
+            ('1010200', 'Depreciation of Fixed Assets', 'CREDIT', 'BS_PROPERTY_PLANT_AND_EQUIPMENT', 'Property, Plant and Equipment', 'USD', true, false, false),
+            ('1010300', 'Impairment of Fixed Assets', 'CREDIT', 'BS_PROPERTY_PLANT_AND_EQUIPMENT', 'Property, Plant and Equipment', 'USD', true, false, false),
+            ('1010400', 'Construction in Progress of Property, Plant and Equipment', 'DEBIT', 'BS_CONSTRUCTION_IN_PROGRESS_OF_PROPERTY_PLANT_AND_EQUIPMENT', 'Property, Plant and Equipment', 'USD', true, false, false),
+            ('1010500', 'Fixed Assets Acquired', 'DEBIT', 'BS_FIXED_ASSETS_ACQUIRED', 'Property, Plant and Equipment', 'USD', true, false, false),
+            ('1010600', 'Capital Improvements to Property, Plant and Equipment', 'DEBIT', 'BS_CAPITAL_IMPROVEMENTS_TO_PROPERTY_PLANT_AND_EQUIPMENT', 'Property, Plant and Equipment', 'USD', true, false, false),
+            
+            ('1020000', 'Investment Property', 'DEBIT_CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Non-Current Assets', 'USD', true, false, false),
+            ('1020100', 'Investment Property at Cost', 'DEBIT', 'BS_INVESTMENT_PROPERTY', 'Investment Property', 'USD', true, false, false),
+            ('1020200', 'Investment Property at Fair Value', 'DEBIT', 'BS_INVESTMENT_PROPERTY', 'Investment Property', 'USD', true, false, false),
+            ('1020300', 'Depreciation of Investment Property', 'CREDIT', 'BS_INVESTMENT_PROPERTY', 'Investment Property', 'USD', true, false, false),
+            ('1020400', 'Impairment of Investment Property', 'CREDIT', 'BS_INVESTMENT_PROPERTY', 'Investment Property', 'USD', true, false, false),
+            ('1020500', 'Construction in Progress of Investment Property', 'DEBIT', 'BS_CONSTRUCTION_IN_PROGRESS_OF_INVESTMENT_PROPERTY', 'Investment Property', 'USD', true, false, false),
+            ('1020600', 'Capital Improvements to Investment Property', 'DEBIT', 'BS_CAPITAL_IMPROVEMENTS_TO_INVESTMENT_PROPERTY', 'Investment Property', 'USD', true, false, false),
+            
+            ('1030000', 'Intangible Assets', 'DEBIT_CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Non-Current Assets', 'USD', true, false, false),
+            ('1030100', 'Intangible Assets', 'DEBIT', 'BS_INTANGIBLE_ASSETS', 'Intangible Assets', 'USD', true, false, false),
+            ('1030200', 'Amortization of Intangible Assets', 'CREDIT', 'BS_INTANGIBLE_ASSETS', 'Intangible Assets', 'USD', true, false, false),
+            ('1030300', 'Impairment of Intangible Assets', 'CREDIT', 'BS_INTANGIBLE_ASSETS', 'Intangible Assets', 'USD', true, false, false),
+            ('1030400', 'Construction in Progress of Intangible Assets', 'DEBIT', 'BS_CONSTRUCTION_IN_PROGRESS_OF_INTANGIBLE_ASSETS', 'Intangible Assets', 'USD', true, false, false),
+            ('1030500', 'Capital Improvements to Intangible Assets', 'DEBIT', 'BS_CAPITAL_IMPROVEMENTS_TO_INTANGIBLE_ASSETS', 'Intangible Assets', 'USD', true, false, false),
+            
+            ('1040000', 'Non-Current Financial Assets', 'DEBIT_CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Non-Current Assets', 'USD', true, false, false),
+            ('1040100', 'Non-Current Loans Issued', 'DEBIT_CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Non-Current Financial Assets', 'USD', true, false, false),
+            ('1040101', 'Non-Current Loans Issued', 'DEBIT', 'BS_NON_CURRENT_FINANCIAL_ASSETS', 'Non-Current Loans Issued', 'USD', true, false, false),
+            ('1040102', 'Non-Current Interest Receivable', 'DEBIT', 'BS_NON_CURRENT_FINANCIAL_ASSETS', 'Non-Current Loans Issued', 'USD', true, false, false),
+            ('1040103', 'Provision for Non-Current Loans Issued', 'CREDIT', 'BS_NON_CURRENT_FINANCIAL_ASSETS', 'Non-Current Loans Issued', 'USD', true, false, false),
+            ('1040200', 'Equity Investments', 'DEBIT', 'BS_NON_CURRENT_FINANCIAL_ASSETS', 'Non-Current Financial Assets', 'USD', true, false, false),
+            ('1040300', 'Other Non-Current Financial Assets', 'DEBIT', 'BS_NON_CURRENT_FINANCIAL_ASSETS', 'Non-Current Financial Assets', 'USD', true, false, false),
+            ('1040400', 'Non-Current Receivables', 'DEBIT_CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Non-Current Financial Assets', 'USD', true, false, false),
+            ('1040401', 'Other Non-Current Receivables', 'DEBIT', 'BS_NON_CURRENT_FINANCIAL_ASSETS', 'Non-Current Receivables', 'USD', true, false, false),
+            ('1040402', 'Non-Current Advances Paid to Suppliers', 'DEBIT', 'BS_NON_CURRENT_FINANCIAL_ASSETS', 'Non-Current Receivables', 'USD', true, false, false),
+            ('1040403', 'Bad Debt Provisions for Non-Current Receivables', 'CREDIT', 'BS_NON_CURRENT_FINANCIAL_ASSETS', 'Non-Current Receivables', 'USD', true, false, false),
+            
+            ('1050000', 'Deferred Tax Assets', 'DEBIT', 'BS_DEFERRED_TAX_ASSETS', 'Non-Current Assets', 'USD', true, false, false),
+            ('1060000', 'Non-Current Inventories', 'DEBIT', 'BS_NON_CURRENT_INVENTORIES', 'Non-Current Assets', 'USD', true, false, false),
+            ('1070000', 'Non-Current Deferred Expenses', 'DEBIT', 'BS_NON_CURRENT_DEFERRED_EXPENSES', 'Non-Current Assets', 'USD', true, false, false),
+            
+            ('1090000', 'Other Non-Current Assets', 'DEBIT_CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Non-Current Assets', 'USD', true, false, false),
+            ('1090100', 'Other Non-Current Assets', 'DEBIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Other Non-Current Assets', 'USD', true, false, false),
+            ('1090200', 'Provision for Other Non-Current Assets', 'CREDIT', 'BS_OTHER_NON_CURRENT_ASSETS', 'Other Non-Current Assets', 'USD', true, false, false);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

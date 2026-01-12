@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="022-seed-coa-batches-3-to-9" author="system">
+        <comment>Seed Equity, Liabilities, Income, Expenses, Profit/Loss, Off-Balance (129 accounts)</comment>
+        
+        <sql>
+            -- Batch 3: Equity (7 accounts)
+            INSERT INTO chart_of_accounts (account_code, description, account_type, section, parent_group, currency, is_active, is_off_balance, is_quantitative) VALUES
+            ('3000000', 'Equity', 'DEBIT_CREDIT', 'Accounts Group', 'Accounts Group', 'USD', true, false, false),
+            ('3010000', 'Issued Share Capital', 'CREDIT', 'BS_CAPITAL_ISSUED', 'Equity', 'USD', true, false, false),
+            ('3020000', 'Retained Earnings', 'DEBIT_CREDIT', 'BS_RETAINED_EARNINGS', 'Equity', 'USD', true, false, false),
+            ('3030000', 'Share Premium', 'CREDIT', 'BS_SHARE_PREMIUM', 'Equity', 'USD', true, false, false),
+            ('3040000', 'Treasury Shares', 'DEBIT', 'BS_TREASURY_SHARES', 'Equity', 'USD', true, false, false),
+            ('3050000', 'Other Equity Interest', 'CREDIT', 'BS_OTHER_EQUITY_COMPONENTS', 'Equity', 'USD', true, false, false),
+            ('3060000', 'Other Reserves', 'CREDIT', 'BS_RESERVES', 'Equity', 'USD', true, false, false),
+            
+            -- Batch 4: Non-Current Liabilities (13 accounts)
+            ('4000000', 'Non-Current Liabilities', 'DEBIT_CREDIT', 'Accounts Group', 'Accounts Group', 'USD', true, false, false),
+            ('4010000', 'Non-Current Loans Received', 'CREDIT', 'Accounts Group', 'Non-Current Liabilities', 'USD', true, false, false),
+            ('4010100', 'Non-Current Loans Received', 'CREDIT', 'BS_NON_CURRENT_FINANCIAL_LIABILITIES', 'Non-Current Loans Received', 'USD', true, false, false),
+            ('4010200', 'Interest Payable (Non-Current Loans Received)', 'CREDIT', 'BS_NON_CURRENT_FINANCIAL_LIABILITIES', 'Non-Current Loans Received', 'USD', true, false, false),
+            ('4020000', 'Non-Current Bank Loans Received', 'CREDIT', 'Accounts Group', 'Non-Current Liabilities', 'USD', true, false, false),
+            ('4020100', 'Non-Current Bank Loans Received', 'CREDIT', 'BS_NON_CURRENT_FINANCIAL_LIABILITIES', 'Non-Current Bank Loans Received', 'USD', true, false, false),
+            ('4020200', 'Interest Payable (Non-Current Bank Loans Received)', 'CREDIT', 'BS_NON_CURRENT_FINANCIAL_LIABILITIES', 'Non-Current Bank Loans Received', 'USD', true, false, false),
+            ('4030000', 'Non-Current Finance Lease Liabilities', 'CREDIT', 'BS_NON_CURRENT_FINANCIAL_LIABILITIES', 'Non-Current Liabilities', 'USD', true, false, false),
+            ('4040000', 'Other Non-Current Financial Liabilities', 'CREDIT', 'BS_NON_CURRENT_FINANCIAL_LIABILITIES', 'Non-Current Liabilities', 'USD', true, false, false),
+            ('4050000', 'Deferred Tax Liabilities', 'CREDIT', 'BS_DEFERRED_TAX_LIABILITIES', 'Non-Current Liabilities', 'USD', true, false, false),
+            ('4060000', 'Other Non-Current Liabilities', 'CREDIT', 'BS_OTHER_NON_CURRENT_LIABILITIES', 'Non-Current Liabilities', 'USD', true, false, false),
+            ('4070000', 'Non-Current Deferred Revenue', 'CREDIT', 'BS_NON_CURRENT_DEFERRED_REVENUE', 'Non-Current Liabilities', 'USD', true, false, false),
+            ('4080000', 'Non-Current Contract Liabilities', 'CREDIT', 'BS_NON_CURRENT_CONTRACT_LIABILITIES', 'Non-Current Liabilities', 'USD', true, false, false);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

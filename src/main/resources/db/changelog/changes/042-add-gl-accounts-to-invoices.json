@@ -1,0 +1,51 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "042-add-gl-accounts-to-invoices",
+                "author": "system",
+                "changes": [
+                    {
+                        "addColumn": {
+                            "tableName": "invoices",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "accounts_payable_gl_account_id",
+                                        "type": "BIGINT",
+                                        "remarks": "GL Account for Accounts Payable (e.g., Current Trade Payables)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "prepayments_gl_account_id",
+                                        "type": "BIGINT",
+                                        "remarks": "GL Account for Prepayments to Suppliers"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "invoices",
+                            "baseColumnNames": "accounts_payable_gl_account_id",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "constraintName": "fk_inv_ap_gl_account"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "invoices",
+                            "baseColumnNames": "prepayments_gl_account_id",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "constraintName": "fk_inv_prepay_gl_account"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

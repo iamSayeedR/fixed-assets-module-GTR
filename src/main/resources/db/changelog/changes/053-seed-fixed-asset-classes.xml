@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+
+    <changeSet id="053-seed-fixed-asset-classes" author="system">
+        <comment>Seed fixed asset classes based on screenshot data</comment>
+        
+        <!-- Buildings -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000001"/>
+            <column name="description" value="Buildings"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Buildings (Investment Property) -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000002"/>
+            <column name="description" value="Buildings (Investment Property)"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Furniture and Fixtures -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000007"/>
+            <column name="description" value="Furniture and Fixtures"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Land -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000003"/>
+            <column name="description" value="Land"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Land (Investment Property) -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000004"/>
+            <column name="description" value="Land (Investment Property)"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Machinery -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000006"/>
+            <column name="description" value="Machinery"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Office equipment -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000008"/>
+            <column name="description" value="Office equipment"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Other Fixed Assets -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000009"/>
+            <column name="description" value="Other Fixed Assets"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Structures -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000010"/>
+            <column name="description" value="Structures"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Tools and equipment -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000005"/>
+            <column name="description" value="Tools and equipment"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Vehicles -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000011"/>
+            <column name="description" value="Vehicles"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Computer Equipments -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000012"/>
+            <column name="description" value="Computer Equipments"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Software -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000013"/>
+            <column name="description" value="Software"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Motor Vehicles -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000014"/>
+            <column name="description" value="Motor Vehicles"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+        <!-- Tools &amp; Equipments -->
+        <insert tableName="fixed_asset_classes">
+            <column name="code" value="00-0000015"/>
+            <column name="description" value="Tools &amp; Equipments"/>
+            <column name="asset_type" value="Property, Plant and Equipment"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="created_by" value="system"/>
+        </insert>
+        
+    </changeSet>
+</databaseChangeLog>

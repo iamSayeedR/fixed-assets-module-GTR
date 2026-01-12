@@ -1,0 +1,409 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "044-create-fixed-assets-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "fixed_assets",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "fixed_asset_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "asset_number",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "unique": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "VARCHAR(255)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "folder",
+                                        "type": "VARCHAR(255)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "class_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "category",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "entity_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "location",
+                                        "type": "VARCHAR(255)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "department",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "item_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "expense_item_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "initial_cost",
+                                        "type": "DECIMAL(19,4)",
+                                        "defaultValueNumeric": 0,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "cost_adjustment",
+                                        "type": "DECIMAL(19,4)",
+                                        "defaultValueNumeric": 0
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "accumulated_depreciation",
+                                        "type": "DECIMAL(19,4)",
+                                        "defaultValueNumeric": 0
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "salvage_value",
+                                        "type": "DECIMAL(19,4)",
+                                        "defaultValueNumeric": 0
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_method",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "useful_life_months",
+                                        "type": "INT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "total_units",
+                                        "type": "INT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "remaining_units",
+                                        "type": "INT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_start_date",
+                                        "type": "DATE"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "last_depreciation_date",
+                                        "type": "DATE"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "last_depreciation_calculation_date",
+                                        "type": "TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "next_depreciation_date",
+                                        "type": "DATE"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "gl_account_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_gl_account_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "expense_gl_account_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "held_for_sale_gl_account_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "construction_in_progress_gl_account_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "capital_improvements_gl_account_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "acquisition_date",
+                                        "type": "DATE"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "activation_date",
+                                        "type": "DATE"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "disposal_date",
+                                        "type": "DATE"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "status",
+                                        "type": "VARCHAR(50)",
+                                        "defaultValue": "NEW"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "use_scheduling",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "class_id",
+                            "constraintName": "fk_fixed_assets_class",
+                            "referencedTableName": "fixed_asset_classes",
+                            "referencedColumnNames": "class_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "item_id",
+                            "constraintName": "fk_fixed_assets_item",
+                            "referencedTableName": "items",
+                            "referencedColumnNames": "item_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "expense_item_id",
+                            "constraintName": "fk_fixed_assets_expense_item",
+                            "referencedTableName": "expense_items",
+                            "referencedColumnNames": "expense_item_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "gl_account_id",
+                            "constraintName": "fk_fixed_assets_gl_account",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "depreciation_gl_account_id",
+                            "constraintName": "fk_fixed_assets_depreciation_gl_account",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "expense_gl_account_id",
+                            "constraintName": "fk_fixed_assets_expense_gl_account",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "held_for_sale_gl_account_id",
+                            "constraintName": "fk_fixed_assets_held_for_sale_gl_account",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "construction_in_progress_gl_account_id",
+                            "constraintName": "fk_fixed_assets_cip_gl_account",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_assets",
+                            "baseColumnNames": "capital_improvements_gl_account_id",
+                            "constraintName": "fk_fixed_assets_capital_improvements_gl_account",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_fixed_assets_status",
+                            "tableName": "fixed_assets",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "status"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_fixed_assets_class",
+                            "tableName": "fixed_assets",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "class_id"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_fixed_assets_folder",
+                            "tableName": "fixed_assets",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "folder"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

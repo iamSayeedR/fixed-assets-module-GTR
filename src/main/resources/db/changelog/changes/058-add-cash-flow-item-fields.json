@@ -1,0 +1,37 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "058-add-cash-flow-item-fields",
+                "author": "system",
+                "changes": [
+                    {
+                        "addColumn": {
+                            "tableName": "cash_flow_items",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "flow_type",
+                                        "type": "VARCHAR(20)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "category",
+                                        "type": "VARCHAR(50)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "display_order",
+                                        "type": "INT"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

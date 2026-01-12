@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="025-seed-expense-item-types" author="system">
+        <comment>Seed Expense Item Types (6 types)</comment>
+        
+        <sql>
+            INSERT INTO expense_item_types (code, description, is_active) VALUES
+            ('000000001', 'Tangible Costs', true),
+            ('000000002', 'Labor Costs', true),
+            ('000000003', 'Other Direct Costs', true),
+            ('000000004', 'Cost of Goods Sold', true),
+            ('000000005', 'Other Expenses', true),
+            ('000000006', 'Depreciation Costs', true);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

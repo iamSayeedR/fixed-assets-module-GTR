@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="023-seed-coa-batch5-current-liabilities" author="system">
+        <comment>Seed Current Liabilities (45 accounts)</comment>
+        
+        <sql>
+            INSERT INTO chart_of_accounts (account_code, description, account_type, section, parent_group, currency, is_active, is_off_balance, is_quantitative) VALUES
+            ('5000000', 'Current Liabilities', 'CREDIT', 'BS_CURRENT_LIABILITIES', 'Accounts Group', 'USD', true, false, false),
+            ('5010000', 'Current Financial Liabilities', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Liabilities', 'USD', true, false, false),
+            ('5010100', 'Current Loans', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Financial Liabilities', 'USD', true, false, false),
+            ('5010101', 'Current Loans', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Loans', 'USD', true, false, false),
+            ('5010102', 'Current Interest Payable', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Loans', 'USD', true, false, false),
+            ('5010200', 'Current Bank Loans', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Financial Liabilities', 'USD', true, false, false),
+            ('5010201', 'Current Bank Loans', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Bank Loans', 'USD', true, false, false),
+            ('5010202', 'Current Interest Payable (Bank Loans)', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Bank Loans', 'USD', true, false, false),
+            ('5010300', 'Current Finance Lease Liabilities', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Financial Liabilities', 'USD', true, false, false),
+            ('5010301', 'Current Finance Lease Liabilities', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Finance Lease Liabilities', 'USD', true, false, false),
+            ('5010302', 'Current Interest Payable (Finance Lease Liabilities)', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Finance Lease Liabilities', 'USD', true, false, false),
+            ('5010400', 'Current Portion of Non-Current Loans', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Financial Liabilities', 'USD', true, false, false),
+            ('5010500', 'Current Portion of Non-Current Bank Loans', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Financial Liabilities', 'USD', true, false, false),
+            ('5010600', 'Current Portion of Non-Current Finance Lease Liabilities', 'CREDIT', 'BS_CURRENT_FINANCIAL_LIABILITIES', 'Current Financial Liabilities', 'USD', true, false, false),
+            ('5020000', 'Trade and Other Current Payables', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Current Liabilities', 'USD', true, false, false),
+            ('5020100', 'Current Trade Payables', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5020200', 'Deposits From Customers', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5020300', 'Other Current Payables', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5020400', 'Unbilled Purchases (Payables)', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5020500', 'Current Income Tax Payable', 'CREDIT', 'BS_CURRENT_INCOME_TAX_PAYABLE', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5020600', 'Current VAT Payable', 'CREDIT', 'BS_CURRENT_OTHER_TAX_PAYABLE', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5020700', 'Current Other Tax Payable', 'CREDIT', 'BS_CURRENT_OTHER_TAX_PAYABLE', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5020800', 'Retention VAT Payable', 'CREDIT', 'BS_CURRENT_OTHER_TAX_PAYABLE', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5020900', 'Retention Payables', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Trade and Other Current Payables', 'USD', true, false, false),
+            ('5030000', 'Prepayments from Customers', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Current Liabilities', 'USD', true, false, false),
+            ('5040000', 'Staff Settlements', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Current Liabilities', 'USD', true, false, false),
+            ('5040100', 'Staff Salary Settlements', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('5040200', 'End of Service Benefits', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('5040300', 'Unpaid Employee Business Expenses', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('5040400', 'Staff Provision', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('5040500', 'Other Staff Settlements', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('5040600', 'Accumulated Vacation Pay', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('5050000', 'Provisions', 'CREDIT', 'BS_PROVISIONS', 'Current Liabilities', 'USD', true, false, false),
+            ('5060000', 'Other Current Liabilities', 'CREDIT', 'BS_OTHER_CURRENT_LIABILITIES', 'Current Liabilities', 'USD', true, false, false),
+            ('5070000', 'VAT Accrued on Prepayments Issued', 'CREDIT', 'BS_VAT_ACCRUED_ON_PREPAYMENTS_ISSUED', 'Current Liabilities', 'USD', true, false, false),
+            ('5080000', 'Deferred Revenue', 'CREDIT', 'BS_DEFERRED_REVENUE', 'Current Liabilities', 'USD', true, false, false),
+            ('5090000', 'PDCs Issued', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Current Liabilities', 'USD', true, false, false),
+            ('5090100', 'PDCs Issued to Companies', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'PDCs Issued', 'USD', true, false, false),
+            ('5090200', 'PDCs Issued to Employees', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'PDCs Issued', 'USD', true, false, false),
+            ('5100000', 'Contract Liabilities', 'CREDIT', 'BS_CONTRACT_LIABILITIES', 'Current Liabilities', 'USD', true, false, false);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

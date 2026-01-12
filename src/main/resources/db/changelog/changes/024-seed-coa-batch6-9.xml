@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="024-seed-coa-batches-6-to-9" author="system">
+        <comment>Seed Income, Expenses, Profit/Loss, Off-Balance (64 accounts)</comment>
+        
+        <sql>
+            -- Batch 6: Income (22 accounts)
+            INSERT INTO chart_of_accounts (account_code, description, account_type, section, parent_group, currency, is_active, is_off_balance, is_quantitative) VALUES
+            ('6000000', 'Income', 'CREDIT', 'Accounts Group', 'Accounts Group', 'USD', true, false, false),
+            ('6010000', 'Revenue', 'CREDIT', 'Accounts Group', 'Income', 'USD', true, false, false),
+            ('6010100', 'Sales of Goods', 'CREDIT', 'PL_REVENUE', 'Revenue', 'USD', true, false, false),
+            ('6010200', 'Sales of Services', 'CREDIT', 'PL_REVENUE', 'Revenue', 'USD', true, false, false),
+            ('6010300', 'Sales of Finished Products', 'CREDIT', 'PL_REVENUE', 'Revenue', 'USD', true, false, false),
+            ('6010400', 'Other Sales Revenue', 'CREDIT', 'PL_REVENUE', 'Revenue', 'USD', true, false, false),
+            ('6010500', 'Trade Discounts and Rebates', 'DEBIT', 'Accounts Group', 'Revenue', 'USD', true, false, false),
+            ('6010501', 'Trade Discounts and Rebates on Sales of Goods', 'DEBIT', 'PL_REVENUE', 'Trade Discounts and Rebates', 'USD', true, false, false),
+            ('6010502', 'Trade Discounts and Rebates on Sales of Services', 'DEBIT', 'PL_REVENUE', 'Trade Discounts and Rebates', 'USD', true, false, false),
+            ('6010503', 'Trade Discounts and Rebates on Sales of Finished Products', 'DEBIT', 'PL_REVENUE', 'Trade Discounts and Rebates', 'USD', true, false, false),
+            ('6010504', 'Trade Discounts and Rebates on Other Sales', 'DEBIT', 'PL_REVENUE', 'Trade Discounts and Rebates', 'USD', true, false, false),
+            ('6010600', 'Output VAT', 'DEBIT', 'Accounts Group', 'Revenue', 'USD', true, false, false),
+            ('6010601', 'Output VAT on Sales of Goods', 'DEBIT', 'PL_REVENUE', 'Output VAT', 'USD', true, false, false),
+            ('6010602', 'Output VAT on Sales of Services', 'DEBIT', 'PL_REVENUE', 'Output VAT', 'USD', true, false, false),
+            ('6010603', 'Output VAT on Sales of Finished Products', 'DEBIT', 'PL_REVENUE', 'Output VAT', 'USD', true, false, false),
+            ('6010604', 'Output VAT on Other Sales', 'DEBIT', 'PL_REVENUE', 'Output VAT', 'USD', true, false, false),
+            ('6020000', 'Other Operating Income', 'CREDIT', 'PL_REVENUE', 'Income', 'USD', true, false, false),
+            ('6030000', 'Finance and Other Income', 'CREDIT', 'Accounts Group', 'Income', 'USD', true, false, false),
+            ('6030100', 'Finance Income', 'CREDIT', 'PL_FINANCE_INCOME', 'Finance and Other Income', 'USD', true, false, false),
+            ('6030200', 'Gains on Exchange Differences', 'CREDIT', 'PL_NON_OPERATING_INCOME', 'Finance and Other Income', 'USD', true, false, false),
+            ('6040000', 'Output VAT on Other Operating Income', 'DEBIT', 'PL_NON_OPERATING_INCOME', 'Income', 'USD', true, false, false),
+            
+            -- Batch 7: Expenses (26 accounts)
+            ('7000000', 'Expenses', 'DEBIT_CREDIT', 'Accounts Group', 'Accounts Group', 'USD', true, false, false),
+            ('7010000', 'Cost of Sales', 'DEBIT', 'Accounts Group', 'Expenses', 'USD', true, false, false),
+            ('7010100', 'COS: Raw Materials', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_INVENTORIES_AND_WORKS', 'Cost of Sales', 'USD', true, false, false),
+            ('7010200', 'COS: Goods for Resale', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_INVENTORIES_AND_WORKS', 'Cost of Sales', 'USD', true, false, false),
+            ('7010300', 'COS: Finished Goods', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_INVENTORIES_AND_WORKS', 'Cost of Sales', 'USD', true, false, false),
+            ('7010400', 'COS: Depreciation of Fixed Assets', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_FIXED_ASSETS', 'Cost of Sales', 'USD', true, false, false),
+            ('7010500', 'COS: Amortization of Intangible Assets', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_INTANGIBLE_ASSETS', 'Cost of Sales', 'USD', true, false, false),
+            ('7010600', 'COS: Employee Benefits Expenses', 'DEBIT', 'Accounts Group', 'Cost of Sales', 'USD', true, false, false),
+            ('7010601', 'COS: Salary Expenses', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_EMPLOYEES', 'COS: Employee Benefits Expenses', 'USD', true, false, false),
+            ('7010602', 'COS: Accruals on Other Employee Benefits', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_EMPLOYEES', 'COS: Employee Benefits Expenses', 'USD', true, false, false),
+            ('7010700', 'COS: Other Expenses', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_OTHER', 'Cost of Sales', 'USD', true, false, false),
+            ('7010800', 'COS: Completed Works', 'DEBIT', 'PL_COST_OF_GOODS_SOLD_INVENTORIES_AND_WORKS', 'Cost of Sales', 'USD', true, false, false),
+            ('7020000', 'Selling Expenses', 'DEBIT', 'PL_SELLING_EXPENSES', 'Expenses', 'USD', true, false, false),
+            ('7030000', 'Administrative Expenses', 'DEBIT', 'Accounts Group', 'Expenses', 'USD', true, false, false),
+            ('7030100', 'Employee Benefits Expenses', 'DEBIT', 'PL_ADMINISTRATIVE_EXPENSES_EMPLOYEES', 'Administrative Expenses', 'USD', true, false, false),
+            ('7030200', 'Depreciation of Fixed Assets', 'DEBIT', 'PL_ADMINISTRATIVE_EXPENSES_FIXED_ASSETS', 'Administrative Expenses', 'USD', true, false, false),
+            ('7030300', 'Amortization of Intangible Assets', 'DEBIT', 'PL_ADMINISTRATIVE_EXPENSES_INTANGIBLE_ASSETS', 'Administrative Expenses', 'USD', true, false, false),
+            ('7030400', 'Banking and Other Costs', 'DEBIT', 'PL_ADMINISTRATIVE_EXPENSES_OTHER', 'Administrative Expenses', 'USD', true, false, false),
+            ('7030500', 'Other Administrative Expenses', 'DEBIT', 'PL_ADMINISTRATIVE_EXPENSES_OTHER', 'Administrative Expenses', 'USD', true, false, false),
+            ('7040000', 'Other Operating Expenses', 'DEBIT', 'PL_OTHER_OPERATING_EXPENSE', 'Expenses', 'USD', true, false, false),
+            ('7050000', 'Finance and Other Expenses', 'DEBIT', 'Accounts Group', 'Expenses', 'USD', true, false, false),
+            ('7050100', 'Financial Expenses', 'DEBIT', 'PL_FINANCE_COSTS', 'Finance and Other Expenses', 'USD', true, false, false),
+            ('7050200', 'Losses on Exchange Differences', 'DEBIT', 'PL_NON_OPERATING_EXPENSE', 'Finance and Other Expenses', 'USD', true, false, false),
+            ('7060000', 'Current Tax Expense', 'DEBIT', 'PL_CURRENT_TAX_EXPENSE', 'Expenses', 'USD', true, false, false),
+            ('7070000', 'Hired Labor Cost', 'DEBIT', 'PL_OTHER_OPERATING_EXPENSE', 'Expenses', 'USD', true, false, false),
+            
+            -- Batch 8: Profit or Loss (2 accounts)
+            ('8000000', 'Profit or Loss', 'DEBIT_CREDIT', 'Accounts Group', 'Accounts Group', 'USD', true, false, false),
+            ('8010000', 'Profit or Loss', 'DEBIT', 'PL_PROFIT_OR_LOSS', 'Profit or Loss', 'USD', true, false, false),
+            
+            -- Batch 9: Off-Balance Sheet (14 accounts)
+            ('9000000', 'Off-Balance Sheet Accounts', 'DEBIT_CREDIT', 'Accounts Group', 'Accounts Group', 'USD', true, true, false),
+            ('9010000', 'Current Assets (OBS)', 'DEBIT', 'Accounts Group', 'Off-Balance Sheet Accounts', 'USD', true, true, false),
+            ('9010100', 'Cash Assets (OBS)', 'DEBIT', 'BS_CASH', 'Current Assets (OBS)', 'USD', true, true, false),
+            ('9010200', 'Prepayments to Suppliers (OBS)', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Current Assets (OBS)', 'USD', true, true, false),
+            ('9010300', 'Current Trade Receivables from Customers (OBS)', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Current Assets (OBS)', 'USD', true, true, false),
+            ('9010400', 'Prepaid Employee Business Expenses (OBS)', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'Current Assets (OBS)', 'USD', true, true, false),
+            ('9010500', 'Other Current Receivables - Other Staff Settlements (OBS)', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'Current Assets (OBS)', 'USD', true, true, false),
+            ('9020000', 'Current Liabilities (OBS)', 'CREDIT', 'Accounts Group', 'Off-Balance Sheet Accounts', 'USD', true, true, false),
+            ('9020100', 'Current Trade Payables (OBS)', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Current Liabilities (OBS)', 'USD', true, true, false),
+            ('9020200', 'Prepayments from Customers (OBS)', 'CREDIT', 'BS_TRADE_AND_OTHER_PAYABLES', 'Current Liabilities (OBS)', 'USD', true, true, false),
+            ('9020300', 'Staff Salary Settlements (OBS)', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Current Liabilities (OBS)', 'USD', true, true, false),
+            ('9020400', 'Unpaid Employee Business Expenses (OBS)', 'CREDIT', 'BS_OTHER_LIABILITIES_EMPLOYEES', 'Current Liabilities (OBS)', 'USD', true, true, false),
+            ('9030000', 'Expenses (OBS)', 'DEBIT', 'PL_ADMINISTRATIVE_EXPENSES_OTHER', 'Off-Balance Sheet Accounts', 'USD', true, true, false),
+            ('9040000', 'Income (OBS)', 'CREDIT', 'PL_OTHER_OPERATING_INCOME', 'Off-Balance Sheet Accounts', 'USD', true, true, false);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

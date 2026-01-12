@@ -1,0 +1,107 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "043-create-fixed-asset-classes-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "fixed_asset_classes",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "class_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "code",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "unique": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "VARCHAR(255)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "asset_type",
+                                        "type": "VARCHAR(100)",
+                                        "defaultValue": "Property, Plant and Equipment",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "parent_class_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_active",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": true
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_classes",
+                            "baseColumnNames": "parent_class_id",
+                            "constraintName": "fk_fixed_asset_classes_parent",
+                            "referencedTableName": "fixed_asset_classes",
+                            "referencedColumnNames": "class_id",
+                            "onDelete": "SET NULL"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

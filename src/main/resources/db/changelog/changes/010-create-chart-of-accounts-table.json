@@ -1,0 +1,136 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "010-create-chart-of-accounts-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "chart_of_accounts",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "account_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "account_code",
+                                        "type": "VARCHAR(20)",
+                                        "constraints": {
+                                            "nullable": false,
+                                            "unique": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "VARCHAR(200)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "account_type",
+                                        "type": "VARCHAR(20)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "section",
+                                        "type": "VARCHAR(100)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "parent_group",
+                                        "type": "VARCHAR(200)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_off_balance",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_quantitative",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "currency",
+                                        "type": "VARCHAR(3)",
+                                        "defaultValue": "USD"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_active",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": true,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "details",
+                                        "type": "TEXT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

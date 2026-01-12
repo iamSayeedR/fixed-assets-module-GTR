@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="029-seed-expense-items" author="system">
+        <comment>Seed Expense Items (13 items)</comment>
+        
+        <sql>
+            -- Insert Expense Items with their Expense Item Type relationships
+            -- expense_item_type_id references are based on the codes from 026-seed-expense-item-types.xml
+            -- 000000001 = Tangible Costs
+            -- 000000002 = Labor Costs
+            -- 000000003 = Other Direct Costs
+            -- 000000004 = Cost of Goods Sold
+            -- 000000005 = Other Expenses
+            -- 000000006 = Depreciation Costs
+            
+            INSERT INTO expense_items (description, expense_item_type_id, resource_type, is_active) VALUES
+            ('Cost of Materials', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000004'), 'INVENTORY_ITEM', true),
+            ('Depreciation Costs', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000006'), 'FIXED_ASSET', true),
+            ('Equipment', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000001'), 'ALL', true),
+            ('Exchange Rate Differences', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000005'), 'ALL', true),
+            ('Finance Expense', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000005'), 'ALL', true),
+            ('Labor Costs', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000002'), 'MANPOWER', true),
+            ('Other Operating Expenses', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000005'), 'ALL', true),
+            ('Overheads', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000003'), 'ALL', true),
+            ('Profit (Loss) of Previous Years', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000005'), 'ALL', true),
+            ('Provisional &amp; Contingency', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000003'), 'ALL', true),
+            ('Sub Contract', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000003'), 'SERVICE', true),
+            ('Tangible Costs', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000001'), 'ALL', true),
+            ('Transportation', (SELECT expense_item_type_id FROM expense_item_types WHERE code = '000000003'), 'ALL', true);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

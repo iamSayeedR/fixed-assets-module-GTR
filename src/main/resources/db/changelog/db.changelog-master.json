@@ -1,0 +1,214 @@
+{
+    "databaseChangeLog": [
+        {
+            "include": {
+                "file": "db/changelog/changes/009-create-audit-logs-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/010-create-chart-of-accounts-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/011-create-account-dimensions-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/012-create-items-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/013-create-item-gl-accounts-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/014-create-companies-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/015-create-company-gl-accounts-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/016-create-expense-items-tables.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/017-create-income-cash-flow-items-tables.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/018-create-journal-entries-tables.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/019-create-invoices-tables.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/020-seed-coa-batch1.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/021-seed-coa-batch2.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/022-seed-coa-batch3-4.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/023-seed-coa-batch5.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/024-seed-coa-batch6-9.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/025-create-cash-equivalents-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/026-seed-expense-item-types.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/027-seed-income-items.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/028-seed-cash-flow-items.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/029-seed-expense-items.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/030-seed-account-dimensions.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/042-add-gl-accounts-to-invoices.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/043-create-fixed-asset-classes-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/044-create-fixed-assets-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/045-create-fixed-asset-entries-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/046-create-fixed-asset-depreciation-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/047-create-fixed-asset-monthly-usage-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/048-create-fixed-asset-capital-improvements-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/049-create-fixed-asset-parameter-changes-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/050-create-fixed-asset-write-offs-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/051-create-fixed-asset-sale-preparations-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/052-create-fixed-asset-sales-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/053-seed-fixed-asset-classes.xml"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/054-add-fixed-asset-entry-additional-fields.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/055-create-fixed-asset-conservations-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/056-create-capital-improvement-inventory-items-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/057-create-individual-fixed-assets-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/058-add-cash-flow-item-fields.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/059-create-cash-flow-transactions-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/060-create-equity-accounts-table.json"
+            }
+        },
+        {
+            "include": {
+                "file": "db/changelog/changes/061-create-equity-transactions-table.json"
+            }
+        }
+    ]
+}

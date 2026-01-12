@@ -1,0 +1,145 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "047-create-fixed-asset-monthly-usage-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "fixed_asset_monthly_usage",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "usage_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "usage_number",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "unique": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "fixed_asset_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "usage_period",
+                                        "type": "DATE",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "usage_date",
+                                        "type": "DATE",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "units_used",
+                                        "type": "INT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "notes",
+                                        "type": "TEXT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_processed",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "processed_date",
+                                        "type": "TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "processed_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_monthly_usage",
+                            "baseColumnNames": "fixed_asset_id",
+                            "constraintName": "fk_fixed_asset_usage_asset",
+                            "referencedTableName": "fixed_assets",
+                            "referencedColumnNames": "fixed_asset_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_monthly_usage",
+                            "baseColumnNames": "depreciation_id",
+                            "constraintName": "fk_fixed_asset_usage_depreciation",
+                            "referencedTableName": "fixed_asset_depreciation",
+                            "referencedColumnNames": "depreciation_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addUniqueConstraint": {
+                            "tableName": "fixed_asset_monthly_usage",
+                            "columnNames": "fixed_asset_id, usage_period",
+                            "constraintName": "uk_asset_usage_period"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

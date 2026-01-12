@@ -1,0 +1,87 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "011-create-account-dimensions-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "account_dimensions",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "dimension_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "account_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "dimension_type",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "turnovers_only",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "track_amount",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": true,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "track_quantitative",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "account_dimensions",
+                            "baseColumnNames": "account_id",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "constraintName": "fk_account_dimensions_account"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

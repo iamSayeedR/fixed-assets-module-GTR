@@ -1,0 +1,726 @@
+{
+    "info": {
+        "_postman_id": "fixed-assets-module-collection",
+        "name": "Fixed Assets Module - Complete Lifecycle",
+        "description": "Comprehensive Fixed Assets Management API Collection organized by lifecycle stages",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ],
+    "item": [
+        {
+            "name": "1. Master Data Setup",
+            "description": "Initial setup of Chart of Accounts and Asset Classes",
+            "item": [
+                {
+                    "name": "Chart of Accounts - Fixed Assets",
+                    "item": [
+                        {
+                            "name": "Create Asset Account - Land",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"1500\",\n  \"description\": \"Fixed Assets - Land\",\n  \"accountType\": \"DEBIT\",\n  \"section\": \"NON_CURRENT_ASSETS\",\n  \"parentGroup\": \"FIXED_ASSETS\",\n  \"isOffBalance\": false\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Asset Account - Buildings",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"1510\",\n  \"description\": \"Fixed Assets - Buildings\",\n  \"accountType\": \"DEBIT\",\n  \"section\": \"NON_CURRENT_ASSETS\",\n  \"parentGroup\": \"FIXED_ASSETS\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Asset Account - Machinery",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"1520\",\n  \"description\": \"Fixed Assets - Machinery & Equipment\",\n  \"accountType\": \"DEBIT\",\n  \"section\": \"NON_CURRENT_ASSETS\",\n  \"parentGroup\": \"FIXED_ASSETS\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Asset Account - Vehicles",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"1530\",\n  \"description\": \"Fixed Assets - Vehicles\",\n  \"accountType\": \"DEBIT\",\n  \"section\": \"NON_CURRENT_ASSETS\",\n  \"parentGroup\": \"FIXED_ASSETS\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Asset Account - Computers",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"1550\",\n  \"description\": \"Fixed Assets - Computer Equipment\",\n  \"accountType\": \"DEBIT\",\n  \"section\": \"NON_CURRENT_ASSETS\",\n  \"parentGroup\": \"FIXED_ASSETS\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create CIP Account",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"1560\",\n  \"description\": \"Construction in Progress\",\n  \"accountType\": \"DEBIT\",\n  \"section\": \"NON_CURRENT_ASSETS\",\n  \"parentGroup\": \"FIXED_ASSETS\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Accumulated Depreciation - Buildings",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"1590\",\n  \"description\": \"Accumulated Depreciation - Buildings\",\n  \"accountType\": \"CREDIT\",\n  \"section\": \"NON_CURRENT_ASSETS\",\n  \"parentGroup\": \"ACCUMULATED_DEPRECIATION\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Accumulated Depreciation - Machinery",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"1591\",\n  \"description\": \"Accumulated Depreciation - Machinery\",\n  \"accountType\": \"CREDIT\",\n  \"section\": \"NON_CURRENT_ASSETS\",\n  \"parentGroup\": \"ACCUMULATED_DEPRECIATION\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Depreciation Expense - Buildings",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"6100\",\n  \"description\": \"Depreciation Expense - Buildings\",\n  \"accountType\": \"DEBIT\",\n  \"section\": \"OPERATING_EXPENSES\",\n  \"parentGroup\": \"DEPRECIATION_EXPENSE\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Gain on Sale Account",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"4900\",\n  \"description\": \"Gain on Sale of Fixed Assets\",\n  \"accountType\": \"CREDIT\",\n  \"section\": \"OTHER_INCOME\",\n  \"parentGroup\": \"NON_OPERATING_INCOME\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Loss on Disposal Account",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"accountCode\": \"6106\",\n  \"description\": \"Loss on Disposal of Fixed Assets\",\n  \"accountType\": \"DEBIT\",\n  \"section\": \"OTHER_EXPENSES\",\n  \"parentGroup\": \"NON_OPERATING_EXPENSES\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/chart-of-accounts"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Fixed Asset Classes",
+                    "item": [
+                        {
+                            "name": "Create Class - Buildings",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"code\": \"CLASS-BLDG\",\n  \"description\": \"Buildings and Structures\",\n  \"defaultDepreciationMethod\": \"STRAIGHT_LINE\",\n  \"defaultUsefulLifeMonths\": 240,\n  \"defaultSalvageRate\": 10.0,\n  \"assetGLAccountId\": 2,\n  \"depreciationGLAccountId\": 9,\n  \"accumulatedDepreciationGLAccountId\": 7\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/fixed-asset-classes"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Create Class - Machinery",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"code\": \"CLASS-MACH\",\n  \"description\": \"Machinery & Equipment\",\n  \"defaultDepreciationMethod\": \"STRAIGHT_LINE\",\n  \"defaultUsefulLifeMonths\": 120,\n  \"defaultSalvageRate\": 10.0,\n  \"assetGLAccountId\": 3,\n  \"depreciationGLAccountId\": 9,\n  \"accumulatedDepreciationGLAccountId\": 8\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/fixed-asset-classes"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Get All Asset Classes",
+                            "request": {
+                                "method": "GET",
+                                "header": [],
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/fixed-asset-classes"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "2. Acquisition Stage",
+            "description": "Create assets and register purchases",
+            "item": [
+                {
+                    "name": "Create Fixed Asset",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"assetNumber\": \"FA-2026-001\",\n  \"description\": \"Office Building - Main Campus\",\n  \"assetClassId\": 1,\n  \"folder\": \"Real Estate\",\n  \"location\": \"Main Campus\",\n  \"department\": \"Administration\",\n  \"responsiblePerson\": \"John Doe\",\n  \"purchaseDate\": \"2026-01-15\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets"
+                        }
+                    }
+                },
+                {
+                    "name": "Register Purchase Invoice",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"invoiceNumber\": \"SINV-FA-001\",\n  \"invoiceDate\": \"2026-01-15\",\n  \"dueDate\": \"2026-02-15\",\n  \"documentType\": \"SUPPLIER_INVOICE\",\n  \"companyId\": 1,\n  \"notes\": \"Fixed asset purchase - Office Building\",\n  \"lines\": [\n    {\n      \"lineNumber\": 1,\n      \"itemId\": 1,\n      \"description\": \"Office Building Purchase\",\n      \"quantity\": 1.00,\n      \"unitPrice\": 500000.00,\n      \"vatRate\": 0.00,\n      \"discountRate\": 0.00\n    }\n  ]\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/invoices"
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Assets",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Assets by Status - NEW",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/status/NEW"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "3. Acceptance for Accounting",
+            "description": "Activate assets and set depreciation parameters",
+            "item": [
+                {
+                    "name": "Create Fixed Asset Entry",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"assetId\": 1,\n  \"entryDate\": \"2026-02-01\",\n  \"initialCost\": 500000.00,\n  \"salvageValue\": 50000.00,\n  \"depreciationMethod\": \"STRAIGHT_LINE\",\n  \"usefulLifeMonths\": 240,\n  \"depreciationStartDate\": \"2026-02-01\",\n  \"assetGLAccountId\": 2,\n  \"depreciationGLAccountId\": 9,\n  \"accumulatedDepreciationGLAccountId\": 7\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-asset-entries"
+                        }
+                    }
+                },
+                {
+                    "name": "Post Asset Entry (Activate)",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-asset-entries/1/post"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Entry by ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-asset-entries/1"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Entries by Asset",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-asset-entries/asset/1"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "4. Usage & Depreciation",
+            "description": "Calculate and track depreciation",
+            "item": [
+                {
+                    "name": "Calculate Monthly Depreciation",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"periodDate\": \"2026-02-28\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/depreciation/calculate"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Depreciation Schedule",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/depreciation/schedule/1"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Assets Needing Depreciation",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/needing-depreciation?targetPeriod=2026-02-28"
+                        }
+                    }
+                },
+                {
+                    "name": "Record Monthly Usage (Units of Production)",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"assetId\": 1,\n  \"usageMonth\": \"2026-02\",\n  \"unitsProduced\": 1000,\n  \"notes\": \"February production\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/monthly-usage"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "5. Maintenance & Improvements",
+            "description": "Track capital improvements",
+            "item": [
+                {
+                    "name": "Create Capital Improvement",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"assetId\": 1,\n  \"improvementDate\": \"2026-06-15\",\n  \"description\": \"Building renovation - HVAC upgrade\",\n  \"improvementCost\": 50000.00,\n  \"extendedUsefulLifeMonths\": 24,\n  \"newSalvageValue\": 60000.00,\n  \"notes\": \"Major HVAC system upgrade\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/capital-improvements"
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Capital Improvements",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/capital-improvements"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "6. Reassessment",
+            "description": "Update asset parameters",
+            "item": [
+                {
+                    "name": "Create Parameter Change - Impairment",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"assetId\": 1,\n  \"changeDate\": \"2026-12-31\",\n  \"changeType\": \"IMPAIRMENT\",\n  \"newGrossCost\": 480000.00,\n  \"newSalvageValue\": 45000.00,\n  \"newUsefulLifeMonths\": 200,\n  \"reason\": \"Impairment due to market conditions\",\n  \"notes\": \"Annual impairment review\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/parameter-changes"
+                        }
+                    }
+                },
+                {
+                    "name": "Get All Parameter Changes",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/parameter-changes"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "7. Disposal & Sale",
+            "description": "Dispose or sell assets",
+            "item": [
+                {
+                    "name": "Conservation (Temporary Removal)",
+                    "item": [
+                        {
+                            "name": "Conserve Asset",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"assetId\": 1,\n  \"conservationDate\": \"2026-06-01\",\n  \"reason\": \"Seasonal shutdown\",\n  \"expectedReturnDate\": \"2026-09-01\",\n  \"notes\": \"Summer maintenance period\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/conservations"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Sale Process",
+                    "item": [
+                        {
+                            "name": "Prepare Asset for Sale",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"assetId\": 1,\n  \"preparationDate\": \"2027-01-15\",\n  \"estimatedSalePrice\": 400000.00,\n  \"estimatedSaleDate\": \"2027-02-01\",\n  \"reason\": \"Upgrading to new facility\",\n  \"notes\": \"Asset in good condition\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/sale-preparations"
+                                }
+                            }
+                        },
+                        {
+                            "name": "Record Asset Sale",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"assetId\": 1,\n  \"saleDate\": \"2027-02-01\",\n  \"salePrice\": 420000.00,\n  \"buyerCompanyId\": 10,\n  \"paymentMethod\": \"BANK_TRANSFER\",\n  \"notes\": \"Sale completed successfully\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/sales"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Write-Off Process",
+                    "item": [
+                        {
+                            "name": "Write Off Asset",
+                            "request": {
+                                "method": "POST",
+                                "header": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "body": {
+                                    "mode": "raw",
+                                    "raw": "{\n  \"assetId\": 1,\n  \"writeOffDate\": \"2027-01-15\",\n  \"reason\": \"Damaged beyond repair\",\n  \"disposalType\": \"SCRAPPED\",\n  \"salvageProceeds\": 5000.00,\n  \"notes\": \"Fire damage - total loss\"\n}"
+                                },
+                                "url": {
+                                    "raw": "{{baseUrl}}/api/write-offs"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "8. Reporting & Analytics",
+            "description": "Reports and dashboards",
+            "item": [
+                {
+                    "name": "Get Summary Dashboard",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/reports/summary"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Depreciation Schedule - All Assets",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/reports/depreciation-schedule"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Depreciation Schedule - Single Asset",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/reports/depreciation-schedule/1"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Depreciation Statement",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/reports/depreciation-statement"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Document Expirations",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/reports/document-expirations?onDate=2026-12-31"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Assets by Status - ACTIVE",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/status/ACTIVE"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Assets by Class",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/class/1"
+                        }
+                    }
+                },
+                {
+                    "name": "Get Assets by Folder",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/fixed-assets/folder/Real%20Estate"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}

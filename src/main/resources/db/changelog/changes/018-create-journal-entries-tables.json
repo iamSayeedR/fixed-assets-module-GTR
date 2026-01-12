@@ -1,0 +1,293 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "018-create-journal-entries-tables",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "journal_entries",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "journal_entry_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "entry_number",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "nullable": false,
+                                            "unique": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "entry_date",
+                                        "type": "DATE",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "document_type",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "VARCHAR(500)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "company_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "reference_number",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "total_debit",
+                                        "type": "DECIMAL(19,2)",
+                                        "defaultValueNumeric": 0,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "total_credit",
+                                        "type": "DECIMAL(19,2)",
+                                        "defaultValueNumeric": 0,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "status",
+                                        "type": "VARCHAR(20)",
+                                        "defaultValue": "DRAFT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_date",
+                                        "type": "TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createTable": {
+                            "tableName": "journal_entry_lines",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "line_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "journal_entry_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "line_number",
+                                        "type": "INT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "account_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "debit_amount",
+                                        "type": "DECIMAL(19,2)",
+                                        "defaultValueNumeric": 0,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "credit_amount",
+                                        "type": "DECIMAL(19,2)",
+                                        "defaultValueNumeric": 0,
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "VARCHAR(500)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "item_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "company_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "warehouse",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "contract",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "quantity",
+                                        "type": "DECIMAL(19,4)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "journal_entries",
+                            "baseColumnNames": "company_id",
+                            "referencedTableName": "companies",
+                            "referencedColumnNames": "company_id",
+                            "constraintName": "fk_je_company"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "journal_entry_lines",
+                            "baseColumnNames": "journal_entry_id",
+                            "referencedTableName": "journal_entries",
+                            "referencedColumnNames": "journal_entry_id",
+                            "constraintName": "fk_jel_je"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "journal_entry_lines",
+                            "baseColumnNames": "account_id",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "constraintName": "fk_jel_account"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "journal_entry_lines",
+                            "baseColumnNames": "item_id",
+                            "referencedTableName": "items",
+                            "referencedColumnNames": "item_id",
+                            "constraintName": "fk_jel_item"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "journal_entry_lines",
+                            "baseColumnNames": "company_id",
+                            "referencedTableName": "companies",
+                            "referencedColumnNames": "company_id",
+                            "constraintName": "fk_jel_company"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

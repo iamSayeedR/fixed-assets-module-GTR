@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="027-seed-income-items" author="system">
+        <comment>Seed Income Items (6 items)</comment>
+        
+        <sql>
+            INSERT INTO income_items (code, description, is_active) VALUES
+            ('000000001', 'Sales Revenue', true),
+            ('000000002', 'Exchange Rate Differences', true),
+            ('000000003', 'Sale of Fixed Assets', true),
+            ('000000004', 'Profit (Loss) of Previous Years', true),
+            ('000000005', 'Other Operating Income', true),
+            ('000000006', 'Finance Income', true);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

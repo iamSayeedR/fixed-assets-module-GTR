@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="021-seed-coa-batch2-current-assets" author="system">
+        <comment>Seed Current Assets (73 accounts)</comment>
+        
+        <sql>
+            INSERT INTO chart_of_accounts (account_code, description, account_type, section, parent_group, currency, is_active, is_off_balance, is_quantitative) VALUES
+            ('2000000', 'Current Assets', 'DEBIT_CREDIT', 'BS_OTHER_CURRENT_ASSETS', 'Accounts Group', 'USD', true, false, false),
+            
+            -- Inventories
+            ('2010000', 'Inventories', 'DEBIT_CREDIT', 'BS_INVENTORIES', 'Current Assets', 'USD', true, false, false),
+            ('2010100', 'Raw Materials and Production Supplies', 'DEBIT', 'BS_INVENTORIES', 'Inventories', 'USD', true, false, false),
+            ('2010200', 'Goods', 'DEBIT', 'BS_INVENTORIES', 'Inventories', 'USD', true, false, false),
+            ('2010300', 'Work in Progress', 'DEBIT', 'BS_WORK_IN_PROGRESS', 'Inventories', 'USD', true, false, false),
+            ('2010301', 'Work in Progress - Main Production', 'DEBIT', 'BS_WORK_IN_PROGRESS', 'Work in Progress', 'USD', true, false, false),
+            ('2010302', 'Work in Progress - Secondary Production', 'DEBIT', 'BS_WORK_IN_PROGRESS', 'Work in Progress', 'USD', true, false, false),
+            ('2010303', 'Half-Finished Products', 'DEBIT', 'BS_INVENTORIES', 'Work in Progress', 'USD', true, false, false),
+            ('2010304', 'Work in Progress - Other', 'DEBIT', 'BS_WORK_IN_PROGRESS', 'Work in Progress', 'USD', true, false, false),
+            ('2010400', 'Finished Goods', 'DEBIT', 'BS_INVENTORIES', 'Inventories', 'USD', true, false, false),
+            ('2010500', 'Other Inventories', 'DEBIT', 'BS_INVENTORIES', 'Inventories', 'USD', true, false, false),
+            ('2010600', 'Allowance for Obsolescence', 'CREDIT', 'BS_INVENTORIES', 'Inventories', 'USD', true, false, false),
+            ('2010700', 'Goods on Consignment', 'DEBIT', 'BS_GOODS_TRANSFERRED_TO_THIRD_PARTY', 'Inventories', 'USD', true, false, false),
+            ('2010799', 'Goods on Consignment', 'DEBIT', 'BS_GOODS_TRANSFERRED_TO_THIRD_PARTY', 'Inventories', 'USD', true, false, false),
+            
+            -- Current Financial Assets
+            ('2020000', 'Current Financial Assets', 'DEBIT_CREDIT', 'BS_CURRENT_FINANCIAL_ASSETS', 'Current Assets', 'USD', true, false, false),
+            ('2020100', 'Current Loans Issued', 'DEBIT_CREDIT', 'BS_CURRENT_FINANCIAL_ASSETS', 'Current Financial Assets', 'USD', true, false, false),
+            ('2020101', 'Current Loans Issued', 'DEBIT', 'BS_CURRENT_FINANCIAL_ASSETS', 'Current Loans Issued', 'USD', true, false, false),
+            ('2020102', 'Current Interest Receivable', 'DEBIT', 'BS_CURRENT_FINANCIAL_ASSETS', 'Current Loans Issued', 'USD', true, false, false),
+            ('2020200', 'Current Portion of Non-Current Loans Issued', 'DEBIT', 'BS_CURRENT_FINANCIAL_ASSETS', 'Current Financial Assets', 'USD', true, false, false),
+            ('2020300', 'Bad Debt Provision for Current Loans Issued', 'CREDIT', 'BS_CURRENT_FINANCIAL_ASSETS', 'Current Financial Assets', 'USD', true, false, false),
+            
+            -- Trade Receivables
+            ('2030000', 'Trade and Other Current Receivables', 'DEBIT_CREDIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Current Assets', 'USD', true, false, false),
+            ('2030100', 'Current Trade Receivables from Customers', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2030200', 'Deposits Paid to Suppliers', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2030300', 'Other Current Receivables', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2030400', 'Bad Debt Provision for Trade and Other Current Receivables', 'CREDIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2030500', 'Current Receivables - Group', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2030600', 'Current Income Tax Receivable', 'DEBIT', 'BS_CURRENT_INCOME_TAX_RECEIVABLE', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            
+            -- Input VAT
+            ('2030700', 'Input VAT', 'DEBIT', 'BS_INPUT_VAT', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2030701', 'Input VAT on Purchases of Inventory', 'DEBIT', 'BS_INPUT_VAT', 'Input VAT', 'USD', true, false, false),
+            ('2030702', 'Input VAT on Purchases of Services', 'DEBIT', 'BS_INPUT_VAT', 'Input VAT', 'USD', true, false, false),
+            ('2030703', 'Input VAT on Purchases of Non-Current Assets', 'DEBIT', 'BS_INPUT_VAT', 'Input VAT', 'USD', true, false, false),
+            ('2030704', 'Input VAT on Purchases of Other Current Assets', 'DEBIT', 'BS_INPUT_VAT', 'Input VAT', 'USD', true, false, false),
+            ('2030705', 'Input VAT on Purchases of Inventory (Import)', 'DEBIT', 'BS_INPUT_VAT', 'Input VAT', 'USD', true, false, false),
+            ('2030706', 'Input VAT on Purchases of Services (Import)', 'DEBIT', 'BS_INPUT_VAT', 'Input VAT', 'USD', true, false, false),
+            ('2030707', 'Input VAT on Prepayments Issued', 'DEBIT', 'BS_INPUT_VAT', 'Input VAT', 'USD', true, false, false),
+            ('2030708', 'Retention Input VAT', 'DEBIT', 'BS_INPUT_VAT', 'Input VAT', 'USD', true, false, false),
+            
+            ('2030800', 'Current VAT Receivable', 'DEBIT', 'BS_CURRENT_OTHER_TAX_RECEIVABLE', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2030900', 'VAT Accrued on Prepayments Received', 'DEBIT', 'BS_VAT_ACCRUED_ON_PREPAYMENTS_RECEIVED', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2031000', 'Current Other Tax Receivable', 'DEBIT', 'BS_CURRENT_OTHER_TAX_RECEIVABLE', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            ('2031100', 'Retention Receivables', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Trade and Other Current Receivables', 'USD', true, false, false),
+            
+            -- Prepayments
+            ('2040000', 'Prepayments to Suppliers', 'DEBIT_CREDIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Current Assets', 'USD', true, false, false),
+            ('2040100', 'Prepayments to Suppliers', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Prepayments to Suppliers', 'USD', true, false, false),
+            ('2040200', 'Bad Debt Provision for Prepayments to Suppliers', 'CREDIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Prepayments to Suppliers', 'USD', true, false, false),
+            
+            -- Cash and Cash Equivalents
+            ('2050000', 'Cash and Cash Equivalents', 'DEBIT_CREDIT', 'BS_CASH', 'Current Assets', 'USD', true, false, false),
+            ('2050100', 'Bank Accounts', 'DEBIT', 'BS_CASH_BANKS', 'Cash and Cash Equivalents', 'USD', true, false, false),
+            ('2050200', 'Cash in Hand', 'DEBIT', 'BS_CASH', 'Cash and Cash Equivalents', 'USD', true, false, false),
+            ('2050300', 'Cash in Transit', 'DEBIT', 'BS_CASH', 'Cash and Cash Equivalents', 'USD', true, false, false),
+            ('2050400', 'Short-Term Bank Deposits', 'DEBIT', 'BS_CASH_BANKS', 'Cash and Cash Equivalents', 'USD', true, false, false),
+            ('2050500', 'Other Cash and Cash Equivalents', 'DEBIT', 'BS_CASH_EQUIVALENTS', 'Cash and Cash Equivalents', 'USD', true, false, false),
+            
+            -- Staff
+            ('2060000', 'Staff Settlements', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'Current Assets', 'USD', true, false, false),
+            ('2060100', 'Prepaid Employee Business Expenses', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('2060200', 'Loans to Employees', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('2060300', 'Interest on Loans of Employees', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('2060400', 'Other Staff Settlements', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            ('2060500', 'Payroll Deductions', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'Staff Settlements', 'USD', true, false, false),
+            
+            -- Assets Held for Sale
+            ('2070000', 'Assets Classified as Held for Sale', 'DEBIT', 'BS_ASSETS_CLASSIFIED_AS_HELD_FOR_SALE_FIXED_ASSETS', 'Current Assets', 'USD', true, false, false),
+            ('2070100', 'Assets Classified as Held for Sale - Fixed Assets at Cost', 'DEBIT', 'BS_ASSETS_CLASSIFIED_AS_HELD_FOR_SALE_FIXED_ASSETS', 'Assets Classified as Held for Sale', 'USD', true, false, false),
+            ('2070200', 'Assets Classified as Held for Sale - Investment Property', 'DEBIT', 'BS_ASSETS_CLASSIFIED_AS_HELD_FOR_SALE_INVESTMENT_PROPERTY', 'Assets Classified as Held for Sale', 'USD', true, false, false),
+            ('2070300', 'Assets Classified as Held for Sale - Intangible Assets', 'DEBIT', 'BS_ASSETS_CLASSIFIED_AS_HELD_FOR_SALE_INTANGIBLE_ASSETS', 'Assets Classified as Held for Sale', 'USD', true, false, false),
+            
+            ('2080000', 'Other Current Assets', 'DEBIT', 'BS_OTHER_CURRENT_ASSETS', 'Current Assets', 'USD', true, false, false),
+            ('2090000', 'Deferred Expenses', 'DEBIT', 'BS_DEFERRED_EXPENSES', 'Current Assets', 'USD', true, false, false),
+            
+            -- PDCs
+            ('2100000', 'PDCs Received', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Current Assets', 'USD', true, false, false),
+            ('2100100', 'PDCs Received from Companies', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'PDCs Received', 'USD', true, false, false),
+            ('2100200', 'PDCs Received from Employees', 'DEBIT', 'BS_OTHER_ASSETS_EMPLOYEES', 'PDCs Received', 'USD', true, false, false),
+            
+            ('2110000', 'Work In Progress', 'DEBIT', 'BS_TRADE_AND_OTHER_RECEIVABLES', 'Current Assets', 'USD', true, false, false),
+            ('2110099', 'Contract Assets', 'DEBIT', 'BS_CONTRACT_ASSETS', 'Work In Progress', 'USD', true, false, false);
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,957 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.20.xsd">
+
+    <changeSet id="030-seed-account-dimensions" author="system">
+        <comment>Seed Account Dimensions based on Chart of Accounts screenshots</comment>
+        
+        <sql>
+            -- ========================================
+            -- NON-CURRENT ASSETS - FIXED ASSETS
+            -- ========================================
+            -- 1010000-1010600 - Fixed Assets: Fixed Asset
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'FIXED_ASSET', false, true, false FROM chart_of_accounts WHERE account_code IN ('1010000', '1010100', '1010200', '1010300', '1010400', '1010500', '1010600');
+            
+            -- 1020000-1020600 - Investment Property: Fixed Asset
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'FIXED_ASSET', false, true, false FROM chart_of_accounts WHERE account_code IN ('1020000', '1020100', '1020200', '1020300', '1020400', '1020500', '1020600');
+            
+            -- 1030000-1030500 - Intangible Assets: Fixed Asset
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'FIXED_ASSET', false, true, false FROM chart_of_accounts WHERE account_code IN ('1030000', '1030100', '1030200', '1030300', '1030400', '1030500');
+            
+            -- 1040101-1040403 - Non-Current Financial Assets (specific accounts only): Company, Contract
+            -- Note: 1040100 and 1040400 have NO dimensions
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code IN ('1040101', '1040102', '1040103', '1040200', '1040300', '1040401', '1040402', '1040403');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code IN ('1040101', '1040102', '1040103', '1040200', '1040300', '1040401', '1040402', '1040403');
+            
+            -- 1050000 - Deferred Tax Assets: Tax Type ONLY
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TAX_TYPE', false, true, false FROM chart_of_accounts WHERE account_code = '1050000';
+            
+            -- 1060000 - Other Non-Current Assets: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '1060000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, false FROM chart_of_accounts WHERE account_code = '1060000';
+            
+            -- 1070000 - Non-Current Deferred Expenses: Deferred Expense
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'DEFERRED_EXPENSE', false, true, false FROM chart_of_accounts WHERE account_code = '1070000';
+            
+            -- 1080100, 1080200 - Non-Current Prepaid Expenses: Item
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('1080100', '1080200');
+            
+            -- ========================================
+            -- NON-CURRENT ASSETS - INVENTORIES
+            -- ========================================
+            -- 1010300 - Finished Goods: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '1010300';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '1010300';
+            
+            -- 1010400 - Goods in Transit: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '1010400';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '1010400';
+            
+            -- 1010500 - Work in Progress: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '1010500';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '1010500';
+            
+            -- ========================================
+            -- CURRENT ASSETS (2000000) - BASED ON SCREENSHOT
+            -- ========================================
+            
+            -- ========================================
+            -- 2010000 - INVENTORIES
+            -- ========================================
+            -- 2010100 - Raw Materials and Production Supplies: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '2010100';
+            
+            -- 2010200 - Goods: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010200';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '2010200';
+            
+            -- 2010300 - Work in Progress: No dimensions (parent account)
+            
+            -- 2010301 - Work in Progress Main Production: Expense Item, Cost Object
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010301';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COST_OBJECT', false, true, true FROM chart_of_accounts WHERE account_code = '2010301';
+            
+            -- 2010302 - Work in Progress Secondary Production: Expense Item, Cost Object
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010302';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COST_OBJECT', false, true, true FROM chart_of_accounts WHERE account_code = '2010302';
+            
+            -- 2010303 - Half Finished Products: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010303';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '2010303';
+            
+            -- 2010304 - Work in Progress Other: Expense Item, Cost Object
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010304';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COST_OBJECT', false, true, true FROM chart_of_accounts WHERE account_code = '2010304';
+            
+            -- 2010400 - Finished Goods: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010400';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '2010400';
+            
+            -- 2010500 - Other Inventories: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010500';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '2010500';
+            
+            -- 2010600 - Allowance for Obsolescence: Item, Warehouse
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010600';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'WAREHOUSE', false, true, true FROM chart_of_accounts WHERE account_code = '2010600';
+            
+            -- 2010700 - Goods on Consignment: Item, Company
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010700';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2010700';
+            
+            -- 2010733 - Goods on Consignment Transferred to Third Party: Item, Company
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, true FROM chart_of_accounts WHERE account_code = '2010733';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2010733';
+            
+            -- ========================================
+            -- 2020000 - CURRENT FINANCIAL ASSETS
+            -- ========================================
+            -- 2020000 - Current Financial Assets (parent - no dimensions)
+            
+            -- 2020100 - Current Loans Issued: No dimensions
+            
+            -- 2020101 - Current Interest Receivable: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2020101';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2020101';
+            
+            -- 2020200 - Current Portion of Non Current Loans Issued: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2020200';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2020200';
+            
+            -- 2020300 - Bad Debt Provision for Current Loans Issued: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2020300';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2020300';
+            
+            -- ========================================
+            -- 2030000 - TRADE AND OTHER CURRENT RECEIVABLES
+            -- ========================================
+            -- 2030000 - Trade and Other Current Receivables (parent - no dimensions)
+            
+            -- 2030100 - Current Trade Receivables from Customers: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2030100';
+            
+            -- 2030200 - Deposits Paid to Suppliers: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030200';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2030200';
+            
+            -- 2030300 - Other Current Receivables: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030300';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2030300';
+            
+            -- 2030340 - Bad Debt Provision for Trade and Other Receivables: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030340';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2030340';
+            
+            -- 2030500 - Current Receivables Group: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030500';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2030500';
+            
+            -- 2030600 - Current Income Tax Receivable: Tax Type, Types of Payments
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TAX_TYPE', false, true, false FROM chart_of_accounts WHERE account_code = '2030600';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TYPES_OF_PAYMENTS', false, true, false FROM chart_of_accounts WHERE account_code = '2030600';
+            
+            -- 2030700 - Input VAT (parent - no dimensions)
+            
+            -- 2030701 - Input VAT: Company, Basis, Input VAT Types
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030701';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BASIS', false, true, false FROM chart_of_accounts WHERE account_code = '2030701';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INPUT_VAT_TYPES', false, true, false FROM chart_of_accounts WHERE account_code = '2030701';
+            
+            -- 2030702 - Input VAT on Purchases of Inventory: Company, Basis, Input VAT Types
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030702';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BASIS', false, true, false FROM chart_of_accounts WHERE account_code = '2030702';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INPUT_VAT_TYPES', false, true, false FROM chart_of_accounts WHERE account_code = '2030702';
+            
+            -- 2030703 - Input VAT on Purchases of Services: Company, Basis, Input VAT Types
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030703';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BASIS', false, true, false FROM chart_of_accounts WHERE account_code = '2030703';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INPUT_VAT_TYPES', false, true, false FROM chart_of_accounts WHERE account_code = '2030703';
+            
+            -- 2030704 - Input VAT on Purchases of Non Current Assets: Company, Basis, Input VAT Types
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030704';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BASIS', false, true, false FROM chart_of_accounts WHERE account_code = '2030704';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INPUT_VAT_TYPES', false, true, false FROM chart_of_accounts WHERE account_code = '2030704';
+            
+            -- 2030705 - Input VAT on Purchases of Other Current Assets: Company, Basis, Input VAT Types
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030705';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BASIS', false, true, false FROM chart_of_accounts WHERE account_code = '2030705';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INPUT_VAT_TYPES', false, true, false FROM chart_of_accounts WHERE account_code = '2030705';
+            
+            -- 2030706 - Input VAT on Purchases of Inventory (Import): Company, Basis, Input VAT Types
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030706';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BASIS', false, true, false FROM chart_of_accounts WHERE account_code = '2030706';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INPUT_VAT_TYPES', false, true, false FROM chart_of_accounts WHERE account_code = '2030706';
+            
+            -- 2030707 - Input VAT on Purchases of Services (Import): Company, Basis, Input VAT Types
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030707';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BASIS', false, true, false FROM chart_of_accounts WHERE account_code = '2030707';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INPUT_VAT_TYPES', false, true, false FROM chart_of_accounts WHERE account_code = '2030707';
+            
+            -- 2030708 - Retention Input VAT: Company, Basis, Input VAT Types
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030708';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BASIS', false, true, false FROM chart_of_accounts WHERE account_code = '2030708';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INPUT_VAT_TYPES', false, true, false FROM chart_of_accounts WHERE account_code = '2030708';
+            
+            -- 2030800 - Current VAT Receivable: Tax Type, Types of Payments
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TAX_TYPE', false, true, false FROM chart_of_accounts WHERE account_code = '2030800';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TYPES_OF_PAYMENTS', false, true, false FROM chart_of_accounts WHERE account_code = '2030800';
+            
+            -- 2030900 - VAT Accrued on Prepayments Received: Company, Prepayments Document
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2030900';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'PREPAYMENTS_DOCUMENT', false, true, false FROM chart_of_accounts WHERE account_code = '2030900';
+            
+            -- 2031000 - Current Other Tax Receivable: Tax Type, Types of Payments
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TAX_TYPE', false, true, false FROM chart_of_accounts WHERE account_code = '2031000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TYPES_OF_PAYMENTS', false, true, false FROM chart_of_accounts WHERE account_code = '2031000';
+            
+            -- 2031100 - Retention Receivables: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2031100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2031100';
+            
+            -- ========================================
+            -- 2040000 - PREPAYMENTS TO SUPPLIERS
+            -- ========================================
+            -- 2040000 - Prepayments to Suppliers (parent - no dimensions)
+            
+            -- 2040100 - Prepayments to Suppliers: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2040100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2040100';
+            
+            -- 2040200 - Bad Debt Provision for Prepayments to Suppliers: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2040200';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2040200';
+            
+            -- ========================================
+            -- 2050000 - CASH AND CASH EQUIVALENTS
+            -- ========================================
+            -- 2050000 - Cash and Cash Equivalents (parent - no dimensions)
+            
+            -- 2050100 - Cash on Hand: Cash Flow Item
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CASH_FLOW_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '2050100';
+            
+            -- 2050200 - Bank Accounts: Bank Account, Cash Flow Item
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BANK_ACCOUNT', false, true, false FROM chart_of_accounts WHERE account_code = '2050200';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CASH_FLOW_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '2050200';
+            
+            -- 2050300 - Cash in Transit: Cash Flow Item
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CASH_FLOW_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '2050300';
+            
+            -- 2050400 - Short-Term Bank Deposits: Bank Account, Cash Flow Item
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BANK_ACCOUNT', false, true, false FROM chart_of_accounts WHERE account_code = '2050400';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CASH_FLOW_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '2050400';
+            
+            -- 2050500 - Other Cash and Cash Equivalents: Cash Equivalent, Cash Flow Item
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CASH_EQUIVALENT', false, true, false FROM chart_of_accounts WHERE account_code = '2050500';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CASH_FLOW_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '2050500';
+            
+            -- ========================================
+            -- 2060000 - STAFF SETTLEMENTS
+            -- ========================================
+            -- 2060000 - Other Assets (Employees) (parent - no dimensions)
+            
+            -- 2060100 - Prepaid Employee Business Expenses: Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code = '2060100';
+            
+            -- 2060200 - Loans to Employees: Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code = '2060200';
+            
+            -- 2060300 - Interest on Loans to Employees: Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code = '2060300';
+            
+            -- 2060400 - Other Staff Settlements: Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code = '2060400';
+            
+            -- 2060500 - Payroll Deductions: Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code = '2060500';
+            
+            -- ========================================
+            -- 2070000 - ASSETS CLASSIFIED AS HELD FOR SALE
+            -- ========================================
+            -- 2070000 - Assets Classified as Held for Sale (parent - no dimensions)
+            
+            -- 2070100 - Assets Classified as Held for Sale - Fixed Assets at Cost: Fixed Asset
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'FIXED_ASSET', false, true, false FROM chart_of_accounts WHERE account_code = '2070100';
+            
+            -- 2070200 - Assets Classified as Held for Sale - Investment Property: Investment Property
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INVESTMENT_PROPERTY', false, true, false FROM chart_of_accounts WHERE account_code = '2070200';
+            
+            -- 2070300 - Assets Classified as Held for Sale - Intangible Assets: Fixed Asset
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'FIXED_ASSET', false, true, false FROM chart_of_accounts WHERE account_code = '2070300';
+            
+            -- ========================================
+            -- 2080000 - OTHER CURRENT ASSETS
+            -- ========================================
+            -- 2080000 - Other Current Assets (parent - no dimensions)
+            
+            -- 2080100 - Other Current Assets: Item
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '2080100';
+            
+            -- ========================================
+            -- 2090000 - DEFERRED EXPENSES
+            -- ========================================
+            -- 2090000 - Deferred Expenses: Deferred Expense
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'DEFERRED_EXPENSE', false, true, false FROM chart_of_accounts WHERE account_code = '2090000';
+            
+            -- ========================================
+            -- 2100000 - PDCE RECEIVED
+            -- ========================================
+            -- 2100000 - PDCs Received (parent - no dimensions)
+            
+            -- 2100100 - PDCs Received from Companies: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2100100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2100100';
+            
+            -- 2100200 - PDCs Received from Employees: Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code = '2100200';
+            
+            -- ========================================
+            -- 2110000 - WORK IN PROGRESS (CONTRACT ASSETS)
+            -- ========================================
+            -- 2110000 - Work in Progress: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2110000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2110000';
+            
+            -- 2110099 - Contract Assets: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '2110099';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '2110099';
+            
+            -- ========================================
+            -- EQUITY (3000000)
+            -- ========================================
+            
+            -- 3010000 - Issued Share Capital: Company, Equity Movements Items
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '3010000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EQUITY_MOVEMENTS_ITEMS', false, true, false FROM chart_of_accounts WHERE account_code = '3010000';
+            
+            -- 3020000 - Share Premium: Equity Movements Items
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EQUITY_MOVEMENTS_ITEMS', false, true, false FROM chart_of_accounts WHERE account_code = '3020000';
+            
+            -- 3030000 - Share Premium: Company, Equity Movements Items
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '3030000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EQUITY_MOVEMENTS_ITEMS', false, true, false FROM chart_of_accounts WHERE account_code = '3030000';
+            
+            -- 3040000 - Treasury Shares: Company, Equity Movements Items
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '3040000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EQUITY_MOVEMENTS_ITEMS', false, true, false FROM chart_of_accounts WHERE account_code = '3040000';
+            
+            -- 3050000 - Other Equity Interest: Company, Equity Movements Items
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '3050000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EQUITY_MOVEMENTS_ITEMS', false, true, false FROM chart_of_accounts WHERE account_code = '3050000';
+            
+            -- 3060000 - Other Reserves: Equity Movements Items
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EQUITY_MOVEMENTS_ITEMS', false, true, false FROM chart_of_accounts WHERE account_code = '3060000';
+            
+            -- ========================================
+            -- NON-CURRENT LIABILITIES
+            -- ========================================
+            -- 4010100, 4010200 - Non-Current Loans: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code IN ('4010100', '4010200');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code IN ('4010100', '4010200');
+            
+            -- 4020100, 4020200 - Non-Current Bank Loans: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code IN ('4020100', '4020200');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code IN ('4020100', '4020200');
+            
+            -- 4030000 - Finance Lease Liabilities: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '4030000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '4030000';
+            
+            -- 4040000 - Other Non-Current Financial Liabilities: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '4040000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '4040000';
+            
+            -- 4050000 - Deferred Tax Liabilities: Tax Type
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TAX_TYPE', false, true, false FROM chart_of_accounts WHERE account_code = '4050000';
+            
+            -- 4060000 - Other Non-Current Liabilities: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '4060000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '4060000';
+            
+            -- 4070000 - Non-Current Deferred Revenue: Deferred Revenue
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'DEFERRED_REVENUE', false, true, false FROM chart_of_accounts WHERE account_code = '4070000';
+            
+            -- 4080000 - Non-Current Contract Liabilities: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '4080000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '4080000';
+            
+            -- ========================================
+            -- CURRENT LIABILITIES - FINANCIAL
+            -- ========================================
+            -- 5010101, 5010102 - Current Loans: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code IN ('5010101', '5010102');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code IN ('5010101', '5010102');
+            
+            -- 5010201, 5010202 - Current Bank Loans: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code IN ('5010201', '5010202');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code IN ('5010201', '5010202');
+            
+            -- 5010301, 5010302 - Current Finance Lease: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code IN ('5010301', '5010302');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code IN ('5010301', '5010302');
+            
+            -- ========================================
+            -- CURRENT LIABILITIES - PAYABLES
+            -- ========================================
+            -- 5020100 - Current Trade Payables: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5020100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5020100';
+            
+            -- 5020200 - Deposits From Customers: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5020200';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5020200';
+            
+            -- 5020300 - Other Current Payables: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5020300';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5020300';
+            
+            -- 5020400 - Unbilled Purchases: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5020400';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5020400';
+            
+            -- 5020500 - Current Income Tax Payable: Tax Type, Types of Payments
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TAX_TYPE', false, true, false FROM chart_of_accounts WHERE account_code = '5020500';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TYPES_OF_PAYMENTS', false, true, false FROM chart_of_accounts WHERE account_code = '5020500';
+            
+            -- 5020600, 5020700, 5020800 - VAT and Other Tax Payables: Tax Type, Types of Payments
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TAX_TYPE', false, true, false FROM chart_of_accounts WHERE account_code IN ('5020600', '5020700', '5020800');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TYPES_OF_PAYMENTS', false, true, false FROM chart_of_accounts WHERE account_code IN ('5020600', '5020700', '5020800');
+            
+            -- 5020900 - Retention Payables: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5020900';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5020900';
+            
+            -- 5030000 - Prepayments from Customers: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5030000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5030000';
+            
+            -- ========================================
+            -- CURRENT LIABILITIES - EMPLOYEE
+            -- ========================================
+            -- 5040100-5040600 - Staff Settlements: Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code IN ('5040100', '5040200', '5040300', '5040400', '5040500', '5040600');
+            
+            -- 5050000 - Provisions: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5050000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5050000';
+            
+            -- 5060000 - Other Current Liabilities: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5060000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5060000';
+            
+            -- 5070000 - VAT Accrued on Prepayments Issued: Company, Prepayments Document
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5070000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'PREPAYMENTS_DOCUMENT', false, true, false FROM chart_of_accounts WHERE account_code = '5070000';
+            
+            -- 5080000 - Deferred Revenue: Deferred Revenue
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'DEFERRED_REVENUE', false, true, false FROM chart_of_accounts WHERE account_code = '5080000';
+            
+            -- ========================================
+            -- CURRENT LIABILITIES - PDCs
+            -- ========================================
+            -- 5090100 - PDCs Issued to Companies: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5090100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5090100';
+            
+            -- 5090200 - PDCs Issued to Employees: Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code = '5090200';
+            
+            -- 5100000 - Contract Liabilities: Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code = '5100000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code = '5100000';
+            
+            -- ========================================
+            -- INCOME - REVENUE
+            -- ========================================
+            -- 6010100-6010400 - Sales Revenue: Income Item, Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INCOME_ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010100', '6010200', '6010300', '6010400');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010100', '6010200', '6010300', '6010400');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010100', '6010200', '6010300', '6010400');
+            
+            -- 6010501-6010504 - Trade Discounts: Income Item, Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INCOME_ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010501', '6010502', '6010503', '6010504');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010501', '6010502', '6010503', '6010504');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010501', '6010502', '6010503', '6010504');
+            
+            -- 6010601-6010604 - Output VAT: Income Item, Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INCOME_ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010601', '6010602', '6010603', '6010604');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010601', '6010602', '6010603', '6010604');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code IN ('6010601', '6010602', '6010603', '6010604');
+            
+            -- 6020000 - Other Operating Income: Income Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INCOME_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '6020000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '6020000';
+            
+            -- 6030100 - Finance Income: Income Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INCOME_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '6030100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '6030100';
+            
+            -- 6030200 - Gains on Exchange Differences: Income Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INCOME_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '6030200';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '6030200';
+            
+            -- 6040000 - Output VAT on Other Operating Income: Income Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INCOME_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '6040000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '6040000';
+            
+            -- ========================================
+            -- EXPENSES - COST OF SALES
+            -- ========================================
+            -- 7010100-7010300, 7010800 - COS Inventories: Expense Item, Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010100', '7010200', '7010300', '7010800');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010100', '7010200', '7010300', '7010800');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010100', '7010200', '7010300', '7010800');
+            
+            -- 7010400, 7010500 - COS Fixed Assets: Expense Item, Fixed Asset, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010400', '7010500');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'FIXED_ASSET', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010400', '7010500');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010400', '7010500');
+            
+            -- 7010601, 7010602 - COS Employee Benefits: Expense Item, Employee, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010601', '7010602');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010601', '7010602');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code IN ('7010601', '7010602');
+            
+            -- 7010700 - COS Other Expenses: Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '7010700';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '7010700';
+            
+            -- ========================================
+            -- EXPENSES - SELLING
+            -- ========================================
+            -- 7020000 - Selling Expenses: Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '7020000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '7020000';
+            
+            -- ========================================
+            -- EXPENSES - ADMINISTRATIVE
+            -- ========================================
+            -- 7030100 - Employee Benefits Expenses: Expense Item, Employee, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '7030100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code = '7030100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '7030100';
+            
+            -- 7030200, 7030300 - Depreciation/Amortization: Expense Item, Fixed Asset, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('7030200', '7030300');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'FIXED_ASSET', false, true, false FROM chart_of_accounts WHERE account_code IN ('7030200', '7030300');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code IN ('7030200', '7030300');
+            
+            -- 7030400, 7030500 - Other Administrative Expenses: Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code IN ('7030400', '7030500');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code IN ('7030400', '7030500');
+            
+            -- ========================================
+            -- EXPENSES - OTHER
+            -- ========================================
+            -- 7040000 - Other Operating Expenses: Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '7040000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '7040000';
+            
+            -- 7050100 - Financial Expenses: Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '7050100';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '7050100';
+            
+            -- 7050200 - Losses on Exchange Differences: Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '7050200';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '7050200';
+            
+            -- 7060000 - Current Tax Expense: Expense Item, Tax Type, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '7060000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'TAX_TYPE', false, true, false FROM chart_of_accounts WHERE account_code = '7060000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '7060000';
+            
+            -- 7070000 - Hired Labor Cost: Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '7070000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '7070000';
+            
+            -- ========================================
+            -- PROFIT OR LOSS
+            -- ========================================
+            -- 8010000 - Profit or Loss: Income Item / Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '8010000';
+            
+            -- ========================================
+            -- OFF-BALANCE SHEET
+            -- ========================================
+            -- 9010100 - Cash Assets (OBS): Cash Flow Item
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CASH_FLOW_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '9010100';
+            
+            -- 9010200, 9010300 - Prepayments/Receivables (OBS): Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code IN ('9010200', '9010300');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code IN ('9010200', '9010300');
+            
+            -- 9010400, 9010500 - Employee Related (OBS): Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code IN ('9010400', '9010500');
+            
+            -- 9020100, 9020200 - Payables (OBS): Company, Contract
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'COMPANY', false, true, false FROM chart_of_accounts WHERE account_code IN ('9020100', '9020200');
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'CONTRACT', false, true, false FROM chart_of_accounts WHERE account_code IN ('9020100', '9020200');
+            
+            -- 9020300, 9020400 - Employee Related (OBS): Employee
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EMPLOYEE', false, true, false FROM chart_of_accounts WHERE account_code IN ('9020300', '9020400');
+            
+            -- 9030000 - Expenses (OBS): Expense Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'EXPENSE_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '9030000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '9030000';
+            
+            -- 9040000 - Income (OBS): Income Item, Business Activity
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'INCOME_ITEM', false, true, false FROM chart_of_accounts WHERE account_code = '9040000';
+            
+            INSERT INTO account_dimensions (account_id, dimension_type, turnovers_only, track_amount, track_quantitative)
+            SELECT account_id, 'BUSINESS_ACTIVITY', false, true, false FROM chart_of_accounts WHERE account_code = '9040000';
+        </sql>
+        
+    </changeSet>
+
+</databaseChangeLog>

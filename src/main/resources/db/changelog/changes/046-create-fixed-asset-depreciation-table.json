@@ -1,0 +1,228 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "046-create-fixed-asset-depreciation-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "fixed_asset_depreciation",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "depreciation_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_number",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "unique": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "fixed_asset_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_period",
+                                        "type": "DATE",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_date",
+                                        "type": "DATE",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "opening_gross_cost",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "opening_accumulated_depreciation",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "opening_net_book_value",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_amount",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "closing_accumulated_depreciation",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "closing_net_book_value",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "units_used",
+                                        "type": "INT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "depreciation_per_unit",
+                                        "type": "DECIMAL(19,4)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "TEXT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "journal_entry_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_posted",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_date",
+                                        "type": "TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_depreciation",
+                            "baseColumnNames": "fixed_asset_id",
+                            "constraintName": "fk_fixed_asset_depreciation_asset",
+                            "referencedTableName": "fixed_assets",
+                            "referencedColumnNames": "fixed_asset_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_depreciation",
+                            "baseColumnNames": "journal_entry_id",
+                            "constraintName": "fk_fixed_asset_depreciation_journal",
+                            "referencedTableName": "journal_entries",
+                            "referencedColumnNames": "journal_entry_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addUniqueConstraint": {
+                            "tableName": "fixed_asset_depreciation",
+                            "columnNames": "fixed_asset_id, depreciation_period",
+                            "constraintName": "uk_asset_depreciation_period"
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_depreciation_period",
+                            "tableName": "fixed_asset_depreciation",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "depreciation_period"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_depreciation_asset",
+                            "tableName": "fixed_asset_depreciation",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "fixed_asset_id"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

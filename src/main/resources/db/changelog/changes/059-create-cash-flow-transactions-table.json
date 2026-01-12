@@ -1,0 +1,201 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "059-create-cash-flow-transactions-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "cash_flow_transactions",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "transaction_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "transaction_number",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "unique": true
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "transaction_date",
+                                        "type": "DATE",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "cash_flow_item_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "flow_type",
+                                        "type": "VARCHAR(20)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "category",
+                                        "type": "VARCHAR(50)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "amount",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "TEXT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "entity",
+                                        "type": "VARCHAR(200)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "currency",
+                                        "type": "VARCHAR(10)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "journal_entry_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_posted",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_date",
+                                        "type": "TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "reference_number",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "notes",
+                                        "type": "TEXT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "cash_flow_transactions",
+                            "baseColumnNames": "cash_flow_item_id",
+                            "constraintName": "fk_cash_flow_transactions_item",
+                            "referencedTableName": "cash_flow_items",
+                            "referencedColumnNames": "cash_flow_item_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "cash_flow_transactions",
+                            "baseColumnNames": "journal_entry_id",
+                            "constraintName": "fk_cash_flow_transactions_journal",
+                            "referencedTableName": "journal_entries",
+                            "referencedColumnNames": "journal_entry_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_cash_flow_transactions_date",
+                            "tableName": "cash_flow_transactions",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "transaction_date"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "createIndex": {
+                            "indexName": "idx_cash_flow_transactions_flow_type",
+                            "tableName": "cash_flow_transactions",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "flow_type"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

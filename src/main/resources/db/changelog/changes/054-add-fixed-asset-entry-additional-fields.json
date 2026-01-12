@@ -1,0 +1,40 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "054-add-fixed-asset-entry-additional-fields",
+                "author": "system",
+                "changes": [
+                    {
+                        "addColumn": {
+                            "tableName": "fixed_asset_entries",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "expense_item",
+                                        "type": "VARCHAR(200)",
+                                        "remarks": "Expense item for depreciation"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "business_activity",
+                                        "type": "VARCHAR(200)",
+                                        "remarks": "Business activity associated with the asset"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "category",
+                                        "type": "VARCHAR(200)",
+                                        "remarks": "Asset category for classification"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

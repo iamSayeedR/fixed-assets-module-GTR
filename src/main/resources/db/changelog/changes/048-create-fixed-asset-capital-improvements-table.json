@@ -1,0 +1,204 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "048-create-fixed-asset-capital-improvements-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "fixed_asset_capital_improvements",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "improvement_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "improvement_number",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "unique": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "fixed_asset_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "improvement_date",
+                                        "type": "DATE",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "description",
+                                        "type": "TEXT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "improvement_cost",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "extends_useful_life_months",
+                                        "type": "INT",
+                                        "defaultValueNumeric": 0
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "increases_salvage_value",
+                                        "type": "DECIMAL(19,4)",
+                                        "defaultValueNumeric": 0
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "supplier_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "invoice_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "invoice_number",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "capital_improvements_gl_account_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "journal_entry_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_posted",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_date",
+                                        "type": "TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_capital_improvements",
+                            "baseColumnNames": "fixed_asset_id",
+                            "constraintName": "fk_capital_improvements_asset",
+                            "referencedTableName": "fixed_assets",
+                            "referencedColumnNames": "fixed_asset_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_capital_improvements",
+                            "baseColumnNames": "supplier_id",
+                            "constraintName": "fk_capital_improvements_supplier",
+                            "referencedTableName": "companies",
+                            "referencedColumnNames": "company_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_capital_improvements",
+                            "baseColumnNames": "invoice_id",
+                            "constraintName": "fk_capital_improvements_invoice",
+                            "referencedTableName": "invoices",
+                            "referencedColumnNames": "invoice_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_capital_improvements",
+                            "baseColumnNames": "journal_entry_id",
+                            "constraintName": "fk_capital_improvements_journal",
+                            "referencedTableName": "journal_entries",
+                            "referencedColumnNames": "journal_entry_id",
+                            "onDelete": "SET NULL"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -1,0 +1,171 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "051-create-fixed-asset-sale-preparations-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "fixed_asset_sale_preparations",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "preparation_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "preparation_number",
+                                        "type": "VARCHAR(50)",
+                                        "constraints": {
+                                            "unique": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "fixed_asset_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "preparation_date",
+                                        "type": "DATE",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "expected_sale_date",
+                                        "type": "DATE"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "expected_sale_price",
+                                        "type": "DECIMAL(19,4)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "net_book_value_at_reclassification",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "potential_buyer_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "journal_entry_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "is_posted",
+                                        "type": "BOOLEAN",
+                                        "defaultValueBoolean": false
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_date",
+                                        "type": "TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "posted_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "actual_sale_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_sale_preparations",
+                            "baseColumnNames": "fixed_asset_id",
+                            "constraintName": "fk_sale_preparations_asset",
+                            "referencedTableName": "fixed_assets",
+                            "referencedColumnNames": "fixed_asset_id"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_sale_preparations",
+                            "baseColumnNames": "potential_buyer_id",
+                            "constraintName": "fk_sale_preparations_buyer",
+                            "referencedTableName": "companies",
+                            "referencedColumnNames": "company_id",
+                            "onDelete": "SET NULL"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "fixed_asset_sale_preparations",
+                            "baseColumnNames": "journal_entry_id",
+                            "constraintName": "fk_sale_preparations_journal",
+                            "referencedTableName": "journal_entries",
+                            "referencedColumnNames": "journal_entry_id",
+                            "onDelete": "SET NULL"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}

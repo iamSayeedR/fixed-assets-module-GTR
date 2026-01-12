@@ -1,0 +1,166 @@
+{
+    "databaseChangeLog": [
+        {
+            "changeSet": {
+                "id": "056-create-capital-improvement-inventory-items-table",
+                "author": "system",
+                "changes": [
+                    {
+                        "createTable": {
+                            "tableName": "capital_improvement_inventory_items",
+                            "columns": [
+                                {
+                                    "column": {
+                                        "name": "item_id",
+                                        "type": "BIGINT",
+                                        "autoIncrement": true,
+                                        "constraints": {
+                                            "primaryKey": true,
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "improvement_id",
+                                        "type": "BIGINT",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "source_fixed_asset_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "warehouse",
+                                        "type": "VARCHAR(200)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "item_code",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "item_name",
+                                        "type": "VARCHAR(200)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "content",
+                                        "type": "TEXT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "batch_number",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "quantity",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "uom",
+                                        "type": "VARCHAR(50)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "unit_cost",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "amount",
+                                        "type": "DECIMAL(19,4)",
+                                        "constraints": {
+                                            "nullable": false
+                                        }
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "gl_account_id",
+                                        "type": "BIGINT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "notes",
+                                        "type": "TEXT"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_at",
+                                        "type": "TIMESTAMP",
+                                        "defaultValueComputed": "CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "created_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                },
+                                {
+                                    "column": {
+                                        "name": "updated_by",
+                                        "type": "VARCHAR(100)"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "capital_improvement_inventory_items",
+                            "baseColumnNames": "improvement_id",
+                            "constraintName": "fk_inventory_items_improvement",
+                            "referencedTableName": "fixed_asset_capital_improvements",
+                            "referencedColumnNames": "improvement_id",
+                            "onDelete": "CASCADE"
+                        }
+                    },
+                    {
+                        "addForeignKeyConstraint": {
+                            "baseTableName": "capital_improvement_inventory_items",
+                            "baseColumnNames": "gl_account_id",
+                            "constraintName": "fk_inventory_items_gl_account",
+                            "referencedTableName": "chart_of_accounts",
+                            "referencedColumnNames": "account_id",
+                            "onDelete": "SET NULL"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
